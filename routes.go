@@ -17,10 +17,11 @@ func GetRoutes(view linqcore.View, db database.IDB) linqcore.Routes {
 
 	return linqcore.Routes{
 		linqcore.Route{Name: "Index", Method: "GET", Pattern: "/", HandlerFunc: pageCtrl.LoginPageHandler},
-		linqcore.Route{Name: "Login", Method: "GET", Pattern: "/login.html", HandlerFunc: pageCtrl.LoginPageHandler},
-		linqcore.Route{Name: "UserPage", Method: "GET", Pattern: "/user.html", HandlerFunc: pageCtrl.UserPageHandler},
-		linqcore.Route{Name: "AdminPage", Method: "GET", Pattern: "/admin.html", HandlerFunc: pageCtrl.AdminPageHandler},
-		linqcore.Route{Name: "SuperAdminPage", Method: "GET", Pattern: "/superadmin.html", HandlerFunc: pageCtrl.SuperAdminPageHandler},
+		linqcore.Route{Name: "Login", Method: "GET", Pattern: "/login", HandlerFunc: pageCtrl.LoginPageHandler},
+		linqcore.Route{Name: "UserPage", Method: "GET", Pattern: "/user", HandlerFunc: pageCtrl.UserPageHandler},
+		linqcore.Route{Name: "AdminPage", Method: "GET", Pattern: "/admin", HandlerFunc: pageCtrl.AdminPageHandler},
+		linqcore.Route{Name: "SuperAdminPage", Method: "GET", Pattern: "/superadmin", HandlerFunc: pageCtrl.SuperAdminPageHandler},
+		linqcore.Route{Name: "ScrapePage", Method: "GET", Pattern: "/scrape", HandlerFunc: pageCtrl.ScraperPageHandler},
 
 		// API
 		linqcore.Route{Name: "LoginAction", Method: "POST", Pattern: "/login", HandlerFunc: loginAPI.LoginHandler},

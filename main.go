@@ -29,12 +29,12 @@ func main() {
 		configs.GetIntConfig("db.port"),
 	)
 
-	view := linqcore.NewView("views", configs)
+	view := linqcore.NewView("./views/", configs)
 
 	router := linqcore.NewRouter(GetRoutes(view, db))
 
 	http.Handle("/", router)
 	utils.Log.Info("Listen and serve " + server)
-	err := http.ListenAndServe(":8000", nil)
+	err := http.ListenAndServe(server, nil)
 	utils.HandleFatal(err)
 }

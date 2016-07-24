@@ -19,10 +19,6 @@ func NewScraperAPI(db database.IDB) scraperAPI {
 	return scraperAPI{db: db}
 }
 
-type ScraperVM struct {
-	LiName string `json:"liName"`
-}
-
 type ScrapperResultVM struct {
 	Name         string `json:"Name"`
 	Demographics string `json:"demographics"`
@@ -35,17 +31,11 @@ func (ctrl scraperAPI) ScraperHandler(w http.ResponseWriter, r *http.Request) {
 
 	respWriter := api.ApiService(w, r)
 
-	var requestData ScraperVM
-	err := respWriter.DecodeBody(&requestData)
-	respWriter.HandleApiError(err, http.StatusBadRequest)
+	liName := r.FormValue("LiName")
 
-	if err == nil {
-		result := doScrape(requestData.LiName)
+	result := doScrape(liName)
 
-		if err == nil {
-			respWriter.ReturnJson(result)
-		}
-	}
+	respWriter.ReturnJson(result)
 }
 
 func doScrape(liName string) ScrapperResultVM {

@@ -2,6 +2,6 @@ package models
 
 // UserRole user role model
 type UserRole struct {
-	ID   int `json:"id" db:"id"`
-	Name int `json:"name" db:"name"`
+	ID   string `json:"id" db:"id"`
+	Name string `json:"name" db:"name"`
 }

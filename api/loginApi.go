@@ -1,8 +1,10 @@
 package api
 
 import (
+	"fmt"
 	"net/http"
 
+	"github.com/SofyanHadiA/goscrape/repositories"
 	"github.com/SofyanHadiA/goscrape/services/sessions"
 	"github.com/SofyanHadiA/linqcore/database"
 )
@@ -20,10 +22,28 @@ func (ctrl loginAPI) LoginHandler(response http.ResponseWriter, request *http.Re
 	name := request.FormValue("name")
 	pass := request.FormValue("password")
 	redirectTarget := "/"
+
 	if name != "" && pass != "" {
-		// .. check credentials ..
-		sessions.SetSession(name, response)
-		redirectTarget = "/internal"
+		repo := repositories.NewUserRepo(ctrl.db)
+
+		result, err := repo.Login(name, pass)
+
+		if err != nil {
+			fmt.Println(err)
+			http.Redirect(response, request, redirectTarget, 302)
+		}
+		sessions.SetSession(*result, response)
+
+		fmt.Println((*result).Name)
+		fmt.Println((*result).UserRole)
+
+		if result.RoleID == 1 {
+			redirectTarget = "/user"
+		} else if result.RoleID == 2 {
+			redirectTarget = "/admin"
+		} else if result.RoleID == 3 {
+			redirectTarget = "/superadmin"
+		}
 	}
 	http.Redirect(response, request, redirectTarget, 302)
 }

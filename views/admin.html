@@ -1,3 +1,4 @@
+{{define "main"}}
 <!DOCTYPE html>
 <html>
 
@@ -6,13 +7,14 @@
 </head>
 
 <body>
-    <h1>LinkedIn Scrapper - Super Admin</h1>
+    <h1>LinkedIn Scrapper - Admin</h1>
     <hr>
-    <small>User: {{.user.Name}</small><br/>
-    <small>User: {{.user.UserRole}}</small><br/>
+    <p>User: {{.UserName}}</p>
+    <p>User: {{.UserRole}}</p>
     <form method="post" action="/logout">
         <button type="submit">Logout</button>
     </form>
 </body>
 
 </html>
+{{end}}
