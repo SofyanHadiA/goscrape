@@ -7,13 +7,15 @@
 </head>
 
 <body>
-    <h1>LinkedIn Scrapper - User</h1>
+    <h1>LinkedIn Scrapper - Page for User only</h1>
     <hr>
     <p>User: {{.UserName}}</p>
     <p>User Role: {{.UserRole}}</p>
     <form method="post" action="/logout">
         <button type="submit">Logout</button>
     </form>
+    <hr/>
+    <a href="/scrape">Scraper</a>
 </body>
 
 </html>
